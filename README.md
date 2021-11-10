@@ -4,7 +4,7 @@
     <img src="https://img.shields.io/badge/language-typescript-blue">
     <img src="https://img.shields.io/badge/backend-nodejs-brightgreen">
     <img src="https://img.shields.io/badge/web-reactjs-yellow">
-    <img src="https://img.shields.io/badge/database-mariadb-red">
+    <img src="https://img.shields.io/badge/database-firebase-red">
     <img src="https://img.shields.io/badge/license-MIT-blueviolet">
 </div>
 
