@@ -1,0 +1,14 @@
+.sign-up{
+    display: grid;
+    grid-template-rows: repeat(auto, 4);
+    width: 200px;
+    gap: 16px;
+    padding: 8px;
+}
+
+.sign-up__input{    
+    display: grid;
+    grid-template-rows: repeat(auto, 4);
+    width: 200px;
+    gap: 16px;
+}
