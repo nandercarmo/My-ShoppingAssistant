@@ -1,12 +1,12 @@
-.sign-up{
+.sign-in{
     display: grid;
-    grid-template-rows: repeat(auto, 4);
+    grid-template-rows: repeat(auto, 3);
     width: 400px;
     gap: 16px;
     padding: 8px;
     height: min-content;
 }
 
-.sign-up__button{    
+.sign-in__button{    
     height: 40px;
 }
