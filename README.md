@@ -41,7 +41,6 @@ Para o desenvolvimento desta plataforma serão utilziadas as seguintes tecnologi
 
 ## Backlog do Produto
 
-<<<<<<< HEAD
 O backlog do produto será gerenciado através do site **Trello**, e pode ser acessado através deste [link](https://trello.com/b/OU9XJyxP/eng-software-tp1).
 
 ---
@@ -50,6 +49,4 @@ O backlog do produto será gerenciado através do site **Trello**, e pode ser ac
 
 - [NestJS Environment Config](https://docs.nestjs.com/techniques/configuration)
 - [Authentication and JWT](https://docs.nestjs.com/security/authentication)
-=======
-O backlog do produto será gerenciado através do site **Trelo**, e pode ser acessado através deste [link](https://trello.com/b/OU9XJyxP/eng-software-tp1).
->>>>>>> f5604d99fef8ab24edb8b437be9958b7323bf075
+
