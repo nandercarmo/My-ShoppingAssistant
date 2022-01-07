@@ -11,42 +11,31 @@ export class UsersService {
 		@InjectModel(User.name) private userModel: Model<UserDocument>,
 	) {}
 
-	async create(createUserDto: CreateUserDto) {
-		const user = new this.userModel(createUserDto);
-		return user.save();
+	async create(createUserDto: CreateUserDto): Promise<User> {
+		return await this.userModel.create(createUserDto);
 	}
 
-	async findAll() {
+	async findAll(): Promise<User[]> {
 		return this.userModel.find();
 	}
 
-	async findOne(id: string) {
-		return this.userModel.findById(id);
+	async findOne(id: string): Promise<User> {
+		return await this.userModel.findById(id);
 	}
 
-	async findByUsernameAndPassword(username: string, password: string) {
-		return this.userModel.where({ username, password }).findOne();
+	async findByUsernameAndPassword(
+		username: string,
+		password: string,
+	): Promise<UserDocument> {
+		return await this.userModel.where({ username, password }).findOne();
 	}
 
-	async update(id: string, updateUserDto: UpdateUserDto) {
-		return this.userModel.findByIdAndUpdate(
-			{
-				_id: id,
-			},
-			{
-				updateUserDto,
-			},
-			{
-				new: true,
-			},
-		);
+	async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+		await this.userModel.findByIdAndUpdate(id, updateUserDto);
+		return this.findOne(id);
 	}
 
-	async remove(id: string) {
-		return this.userModel
-			.deleteOne({
-				_id: id,
-			})
-			.exec();
+	async remove(id: string): Promise<User> {
+		return await this.userModel.findByIdAndDelete(id);
 	}
 }

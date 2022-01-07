@@ -3,10 +3,10 @@ import {
 	Get,
 	Post,
 	Body,
-	Patch,
 	Param,
 	Delete,
 	UseGuards,
+	Put,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -35,7 +35,7 @@ export class ProductsController {
 		return this.productsService.findOne(id);
 	}
 
-	@Patch(':id')
+	@Put(':id')
 	@UseGuards(JwtAuthGuard)
 	update(
 		@Param('id') id: string,

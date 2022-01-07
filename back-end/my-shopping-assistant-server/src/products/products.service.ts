@@ -28,7 +28,8 @@ export class ProductsService {
 		id: string,
 		updateProductDto: UpdateProductDto,
 	): Promise<Product> {
-		return await this.productModel.findByIdAndUpdate(id, updateProductDto);
+		await this.productModel.findByIdAndUpdate(id, updateProductDto);
+		return this.findOne(id);
 	}
 
 	async remove(id: string): Promise<Product> {
