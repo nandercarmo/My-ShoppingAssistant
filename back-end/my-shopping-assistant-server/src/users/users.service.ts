@@ -17,7 +17,6 @@ export class UsersService {
 	}
 
 	async findAll() {
-		console.log(this.userModel.find());
 		return this.userModel.find();
 	}
 
