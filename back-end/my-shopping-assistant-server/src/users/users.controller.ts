@@ -7,6 +7,8 @@ import {
 	Delete,
 	UseGuards,
 	Put,
+	Request,
+	Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -33,6 +35,16 @@ export class UsersController {
 	@UseGuards(JwtAuthGuard)
 	findOne(@Param('id') id: string) {
 		return this.usersService.findOne(id);
+	}
+
+	@Get(':id/collection')
+	@UseGuards(JwtAuthGuard)
+	findUserCollections(
+		@Param('id') id: string,
+		@Query('filter') filter: string,
+		@Query('sort') sort: string,
+	) {
+		return this.usersService.findUserCollections(id, filter, sort);
 	}
 
 	@Put(':id')

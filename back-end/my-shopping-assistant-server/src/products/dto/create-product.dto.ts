@@ -1,5 +1,3 @@
-import { Product } from '../entities/product.entity';
-
 export class CreateProductDto {
 	name: string;
 	price: number;
@@ -9,4 +7,5 @@ export class CreateProductDto {
 	disadvantages: string[];
 	productUrl: string;
 	imageUrl: string;
+	collectionId: string;
 }

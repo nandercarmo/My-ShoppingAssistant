@@ -28,6 +28,9 @@ export class Product {
 
 	@Prop()
 	imageUrl: string;
+
+	@Prop()
+	collectionId: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

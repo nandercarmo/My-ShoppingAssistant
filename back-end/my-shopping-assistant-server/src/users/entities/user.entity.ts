@@ -1,5 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import {
+	Collection,
+	CollectionSchema,
+} from 'src/collections/entities/collection.entity';
 
 export type UserDocument = User & Document;
 
@@ -13,6 +17,9 @@ export class User {
 
 	@Prop()
 	password: string;
+
+	@Prop()
+	collections: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CollectionsService } from 'src/collections/collections.service';
+import { FilteredSortedCollectionDto } from 'src/collections/dto/filtered-sorted-collection.dto';
+import { Collection } from 'src/collections/entities/collection.entity';
+import { CollectionFilters } from 'src/collections/util/filters/collection.filter';
+import { CollectionSorters } from 'src/collections/util/sorters/collection.sort';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
@@ -9,6 +14,7 @@ import { User, UserDocument } from './entities/user.entity';
 export class UsersService {
 	constructor(
 		@InjectModel(User.name) private userModel: Model<UserDocument>,
+		private readonly collectionsService: CollectionsService,
 	) {}
 
 	async create(createUserDto: CreateUserDto): Promise<User> {
@@ -28,6 +34,27 @@ export class UsersService {
 		password: string,
 	): Promise<UserDocument> {
 		return await this.userModel.where({ username, password }).findOne();
+	}
+
+	async findUserCollections(
+		userId: any,
+		filter: string,
+		sort: string,
+	): Promise<FilteredSortedCollectionDto> {
+		const user = await this.findOne(userId);
+
+		let collections: Collection[] = new CollectionFilters().apply(
+			await this.collectionsService.findCollectionsByIdsArray(
+				user.collections,
+			),
+			filter,
+		);
+		collections = new CollectionSorters().apply(collections, sort);
+
+		const filteredSortedCollectionDto = new FilteredSortedCollectionDto();
+		filteredSortedCollectionDto.collections = collections;
+
+		return filteredSortedCollectionDto;
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
