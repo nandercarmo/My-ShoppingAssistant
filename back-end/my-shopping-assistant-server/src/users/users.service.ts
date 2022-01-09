@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { use } from 'passport';
 import { CollectionsService } from 'src/collections/collections.service';
 import { FilteredSortedCollectionDto } from 'src/collections/dto/filtered-sorted-collection.dto';
 import { Collection } from 'src/collections/entities/collection.entity';
 import { CollectionFilters } from 'src/collections/util/filters/collection.filter';
 import { CollectionSorters } from 'src/collections/util/sorters/collection.sort';
 import { CreateUserDto } from './dto/create-user.dto';
+import { PagedUserDto } from './dto/paged-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 
@@ -21,8 +23,16 @@ export class UsersService {
 		return await this.userModel.create(createUserDto);
 	}
 
-	async findAll(): Promise<User[]> {
-		return this.userModel.find();
+	async findAll(
+		page: string,
+		elementsPerPage: string,
+	): Promise<PagedUserDto> {
+		const users: User[] = await this.userModel.find();
+		const pagedUserDto: PagedUserDto = new PagedUserDto();
+
+		pagedUserDto.calculate(page, elementsPerPage, users);
+
+		return pagedUserDto;
 	}
 
 	async findOne(id: string): Promise<User> {
