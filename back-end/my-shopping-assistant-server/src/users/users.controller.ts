@@ -47,8 +47,16 @@ export class UsersController {
 		@Param('id') id: string,
 		@Query('filter') filter: string,
 		@Query('sort') sort: string,
+		@Query('page') page: string,
+		@Query('elementsPerPage') elementsPerPage: string,
 	): Promise<FilteredSortedCollectionDto> {
-		return await this.usersService.findUserCollections(id, filter, sort);
+		return await this.usersService.findUserCollections(
+			id,
+			filter,
+			sort,
+			page,
+			elementsPerPage,
+		);
 	}
 
 	@Put(':id')

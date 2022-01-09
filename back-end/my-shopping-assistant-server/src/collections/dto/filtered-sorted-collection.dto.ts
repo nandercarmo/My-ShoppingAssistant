@@ -1,6 +1,6 @@
-import { Collection } from '../entities/collection.entity';
 import { CollectionFilters } from '../util/filters/collection.filter';
 import { CollectionSorters } from '../util/sorters/collection.sort';
+import { PagedCollectionDto } from './paged-collection.dto';
 
 interface IFilteredSorted {
 	name: string;
@@ -18,5 +18,5 @@ export class FilteredSortedCollectionDto {
 			return { name: sorter.name, text: sorter.text };
 		},
 	);
-	collections: Collection[];
+	collections: PagedCollectionDto;
 }

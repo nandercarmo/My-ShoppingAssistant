@@ -55,11 +55,15 @@ export class CollectionsController {
 		@Param('id') id: string,
 		@Query('filter') filter: string,
 		@Query('sort') sort: string,
+		@Query('page') page: string,
+		@Query('elementsPerPage') elementsPerPage: string,
 	): Promise<FilteredSortedProductDto> {
 		return await this.collectionsService.findCollectionProducts(
 			id,
 			filter,
 			sort,
+			page,
+			elementsPerPage,
 		);
 	}
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FilteredSortedProductDto } from 'src/products/dto/filtered-sorted-product.dto';
+import { PagedProductDto } from 'src/products/dto/paged-product.dto';
 import { Product } from 'src/products/entities/product.entity';
 import { ProductsService } from 'src/products/products.service';
 import { ProductFilters } from 'src/products/util/filters/product.filter';
@@ -58,6 +59,8 @@ export class CollectionsService {
 		collectionId: any,
 		filter: string,
 		sort: string,
+		page: string,
+		elementsPerPage: string,
 	): Promise<FilteredSortedProductDto> {
 		const user = await this.findOne(collectionId);
 
@@ -67,8 +70,11 @@ export class CollectionsService {
 		);
 		products = new ProductSorters().apply(products, sort);
 
+		const pagedProductDto: PagedProductDto = new PagedProductDto();
+		pagedProductDto.calculate(page, elementsPerPage, products);
+
 		const filteredSortedProductDto = new FilteredSortedProductDto();
-		filteredSortedProductDto.products = products;
+		filteredSortedProductDto.products = pagedProductDto;
 
 		return filteredSortedProductDto;
 	}

@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { use } from 'passport';
 import { CollectionsService } from 'src/collections/collections.service';
 import { FilteredSortedCollectionDto } from 'src/collections/dto/filtered-sorted-collection.dto';
+import { PagedCollectionDto } from 'src/collections/dto/paged-collection.dto';
 import { Collection } from 'src/collections/entities/collection.entity';
 import { CollectionFilters } from 'src/collections/util/filters/collection.filter';
 import { CollectionSorters } from 'src/collections/util/sorters/collection.sort';
@@ -50,6 +51,8 @@ export class UsersService {
 		userId: any,
 		filter: string,
 		sort: string,
+		page: string,
+		elementsPerPage: string,
 	): Promise<FilteredSortedCollectionDto> {
 		const user = await this.findOne(userId);
 
@@ -61,8 +64,11 @@ export class UsersService {
 		);
 		collections = new CollectionSorters().apply(collections, sort);
 
+		const pagedCollectionDto: PagedCollectionDto = new PagedCollectionDto();
+		pagedCollectionDto.calculate(page, elementsPerPage, collections);
+
 		const filteredSortedCollectionDto = new FilteredSortedCollectionDto();
-		filteredSortedCollectionDto.collections = collections;
+		filteredSortedCollectionDto.collections = pagedCollectionDto;
 
 		return filteredSortedCollectionDto;
 	}
