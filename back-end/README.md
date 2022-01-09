@@ -120,12 +120,12 @@
 
 ```json
 {
-	"firstPage": 0,
-	"page": 0,
-	"elementsPerPage": 5,
-	"totalElements": 4,
-	"lastPage": 0,
-	"users": [ ...UserDto ]
+  "firstPage": 0,
+  "page": 0,
+  "elementsPerPage": 5,
+  "totalElements": 4,
+  "lastPage": 0,
+  "users": [ ...UserDto ]
 }
 ```
 
@@ -255,12 +255,12 @@
 
 ```json
 {
-	"firstPage": 0,
-	"page": 0,
-	"elementsPerPage": 5,
-	"totalElements": 4,
-	"lastPage": 0,
-	"collections": [ ...CollectionDto ]
+  "firstPage": 0,
+  "page": 0,
+  "elementsPerPage": 5,
+  "totalElements": 4,
+  "lastPage": 0,
+  "collections": [ ...CollectionDto ]
 }
 ```
 
@@ -304,7 +304,7 @@
 
 ```json
 {
-	"productId": "61d9a7bfdfda804aeba84b0f"
+  "productId": "61d9a7bfdfda804aeba84b0f"
 ```
 
 ### GET collections
@@ -414,12 +414,12 @@
 
 ```json
 {
-	"firstPage": 0,
-	"page": 0,
-	"elementsPerPage": 5,
-	"totalElements": 4,
-	"lastPage": 0,
-	"products": [ ...ProductDto ]
+  "firstPage": 0,
+  "page": 0,
+  "elementsPerPage": 5,
+  "totalElements": 4,
+  "lastPage": 0,
+  "products": [ ...ProductDto ]
 }
 ```
 
