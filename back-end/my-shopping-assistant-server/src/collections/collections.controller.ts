@@ -17,7 +17,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Collection } from './entities/collection.entity';
 import { FilteredSortedProductDto } from 'src/products/dto/filtered-sorted-product.dto';
 import { PagedCollectionDto } from './dto/paged-collection.dto';
-import { WinnerProductDto } from './dto/winner-product.dto';
+import { CollectionWinnerProductDto } from './dto/collection-winner-product.dto';
 
 @Controller('collections')
 export class CollectionsController {
@@ -81,11 +81,11 @@ export class CollectionsController {
 	@UseGuards(JwtAuthGuard)
 	async setWinnerProduct(
 		@Param('id') id: string,
-		@Body() winnerProductDto: WinnerProductDto,
+		@Body() collectionWinnerProductDto: CollectionWinnerProductDto,
 	): Promise<Collection> {
 		return await this.collectionsService.setWinnerProduct(
 			id,
-			winnerProductDto,
+			collectionWinnerProductDto,
 		);
 	}
 

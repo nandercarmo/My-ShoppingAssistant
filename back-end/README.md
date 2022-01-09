@@ -26,11 +26,13 @@
 		- [PagedCollectionDto](#pagedcollectiondto)
 		- [CollectionFilteredSortedProductsDto](#collectionfilteredsortedproductsdto)
 		- [CollectionForm](#collectionform)
+		- [CollectionWinnerProductForm](#collectionwinnerproductform)
 		- [GET collections](#get-collections)
 		- [GET collections/:id](#get-collectionsid)
 		- [GET collections/:id/product](#get-collectionsidproduct)
 		- [POST collections](#post-collections)
 		- [PUT collections/:id](#put-collectionsid)
+		- [PUT collections/:id/finish](#put-collectionsidfinish)
 		- [DELETE collections/:id](#delete-collectionsid)
 	- [Products Endpoints](#products-endpoints)
 		- [ProductDto](#productdto)
@@ -298,6 +300,13 @@
 }
 ```
 
+### CollectionWinnerProductForm
+
+```json
+{
+	"productId": "61d9a7bfdfda804aeba84b0f"
+```
+
 ### GET collections
 
 - **Função**: `Recupera todas as coleções criadas`
@@ -351,6 +360,17 @@
 - **Path params**: `id do elemento (string)`
 - **Query params**: `none`
 - **Request body params**: [CollectionForm](#collectionform)
+- **Response Body**: [CollectionDto](#collectiondto)
+
+### PUT collections/:id/finish
+
+- **Função**: `Atualiza uma coleção, setando um produto como vencedor`
+- **Método HTTP**: `PUT`
+- **Path**: `/collections/:id/finish`
+- **Exige autenticação?**: `Sim`
+- **Path params**: `id do elemento (string)`
+- **Query params**: `none`
+- **Request body params**: [CollectionWinnerProductForm](#collectionwinnerproductform)
 - **Response Body**: [CollectionDto](#collectiondto)
 
 ### DELETE collections/:id
