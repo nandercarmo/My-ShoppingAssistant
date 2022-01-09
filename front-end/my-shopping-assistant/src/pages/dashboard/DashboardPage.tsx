@@ -1,11 +1,12 @@
 import { Button } from "@material-ui/core";
 import React from "react"
-import { logout } from "../../service/firebase";
+import {useAuth} from "../../contexts/auth";
 
 const DashboardPage: React.FC = () => {
+    const { Logout } = useAuth();
 
     return <div>
-        <Button onClick={logout}> 
+        <Button onClick={() => Logout()}>
             Log Out
         </Button>
         DashboardPage

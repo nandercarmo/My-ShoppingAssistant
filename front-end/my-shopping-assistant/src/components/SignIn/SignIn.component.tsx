@@ -1,12 +1,10 @@
 import { TextField, Button, Typography } from "@material-ui/core";
 import React, { useState } from "react"
-import { login, signInWithGoogle } from "../../service/firebase";
-
-import GoogleIcon from '@mui/icons-material/Google';
-
 import './SignIn.style.css';
+import {useAuth} from "../../contexts/auth";
 
 const SignIn: React.FC = () => {
+    const { Login } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     return (
@@ -21,7 +19,7 @@ const SignIn: React.FC = () => {
             id="email"
             label="Email"
             size='small'
-            variant='standard'
+            variant='outlined'
             value={email}
             onChange={v => setEmail(v.target.value)}
             />
@@ -30,11 +28,11 @@ const SignIn: React.FC = () => {
             label="Password"
             type='password'
             size='small'
-            variant='standard'
+            variant='outlined'
             value={password}
             onChange={v => setPassword(v.target.value)}
             />
-            <Button variant="outlined" color='primary' className='sign-in__button' onClick={() => login(email, password)}>
+            <Button variant="contained" color='primary' className='sign-in__button' onClick={() => Login(email, password)}>
                 Sign In
             </Button>
         </div>
