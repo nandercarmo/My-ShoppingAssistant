@@ -4,6 +4,8 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import MainRoutes from "./MainRoutes";
 import {AuthProvider} from "./contexts/auth";
+import {CollectionsProvider} from "./contexts/collections";
+import {ProductsProvider} from "./contexts/products";
 
 const theme = createTheme({
   palette: {
@@ -42,11 +44,15 @@ const App: React.FC = () => {
   return (
     <div>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <MainRoutes />
-          </BrowserRouter>
-        </ThemeProvider>
+        <CollectionsProvider>
+          <ProductsProvider>
+            <ThemeProvider theme={theme}>
+              <BrowserRouter>
+                <MainRoutes />
+              </BrowserRouter>
+            </ThemeProvider>
+          </ProductsProvider>
+        </CollectionsProvider>
       </AuthProvider>
     </div>
   );

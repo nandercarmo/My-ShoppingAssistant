@@ -1,0 +1,17 @@
+.dashboard-container{
+    padding: 16px;
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 8px;
+}
+
+.collection-cards-container{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(5, 250px);
+}
+
+.create-collection-card-actions{
+    padding-left: 16px !important;
+    padding-bottom: 8px !important;
+}

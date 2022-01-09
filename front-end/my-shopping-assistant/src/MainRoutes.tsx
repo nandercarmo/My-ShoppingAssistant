@@ -4,6 +4,7 @@ import './App.css';
 import LogInPage from './pages/login/LogInPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import {useAuth} from "./contexts/auth";
+import CollectionPage from "./pages/collection/CollectionPage";
 
 function MainRoutes() {
   const { signed } = useAuth()
@@ -15,17 +16,20 @@ function MainRoutes() {
     } else {
         navigate('/login')
     }
-  }, [navigate, signed])
+  }, [signed])
 
   return (
       <Routes>
             <Route path="*" element={<Navigate replace to={signed ? '/dashboard' : '/login'} />} />
             <Route 
-            path="/dashboard" 
-            element={<DashboardPage />} />
+                path="/dashboard"
+                element={<DashboardPage />} />
             <Route
-              path="/login"
-              element={<LogInPage />}
+                path="/collection/*"
+                element={<CollectionPage />} />
+            <Route
+                path="/login"
+                element={<LogInPage />}
             />
       </Routes>
   );
