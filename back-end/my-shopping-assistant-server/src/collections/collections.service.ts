@@ -8,6 +8,7 @@ import { ProductFilters } from 'src/products/util/filters/product.filter';
 import { ProductSorters } from 'src/products/util/sorters/product.sort';
 import { User, UserDocument } from 'src/users/entities/user.entity';
 import { CreateCollectionDto } from './dto/create-collection.dto';
+import { PagedCollectionDto } from './dto/paged-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { Collection, CollectionDocument } from './entities/collection.entity';
 
@@ -37,8 +38,16 @@ export class CollectionsService {
 		return collection;
 	}
 
-	async findAll(): Promise<Collection[]> {
-		return await this.collectionModel.find();
+	async findAll(
+		page: string,
+		elementsPerPage: string,
+	): Promise<PagedCollectionDto> {
+		const collections: Collection[] = await this.collectionModel.find();
+		const pagedCollectionDto: PagedCollectionDto = new PagedCollectionDto();
+
+		pagedCollectionDto.calculate(page, elementsPerPage, collections);
+
+		return pagedCollectionDto;
 	}
 
 	async findOne(id: string): Promise<Collection> {

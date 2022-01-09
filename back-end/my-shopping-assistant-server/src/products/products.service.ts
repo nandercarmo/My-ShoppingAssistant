@@ -6,6 +6,7 @@ import {
 	CollectionDocument,
 } from 'src/collections/entities/collection.entity';
 import { CreateProductDto } from './dto/create-product.dto';
+import { PagedProductDto } from './dto/paged-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product, ProductDocument } from './entities/product.entity';
 
@@ -34,8 +35,16 @@ export class ProductsService {
 		return product;
 	}
 
-	async findAll(): Promise<Product[]> {
-		return await this.productModel.find();
+	async findAll(
+		page: string,
+		elementsPerPage: string,
+	): Promise<PagedProductDto> {
+		const products: Product[] = await this.productModel.find();
+		const pagedProductDto: PagedProductDto = new PagedProductDto();
+
+		pagedProductDto.calculate(page, elementsPerPage, products);
+
+		return pagedProductDto;
 	}
 
 	async findOne(id: string): Promise<Product> {
