@@ -12,6 +12,7 @@
 		- [GET logged-user](#get-logged-user)
 	- [Users Endpoints](#users-endpoints)
 		- [UserDto](#userdto)
+		- [PagedUserDto](#pageduserdto)
 		- [UserFilteredSortedCollectionsDto](#userfilteredsortedcollectionsdto)
 		- [UserForm](#userform)
 		- [GET users](#get-users)
@@ -22,6 +23,7 @@
 		- [DELETE users/:id](#delete-usersid)
 	- [Collections Endpoints](#collections-endpoints)
 		- [CollectionDto](#collectiondto)
+		- [PagedCollectionDto](#pagedcollectiondto)
 		- [CollectionFilteredSortedProductsDto](#collectionfilteredsortedproductsdto)
 		- [CollectionForm](#collectionform)
 		- [GET collections](#get-collections)
@@ -32,6 +34,7 @@
 		- [DELETE collections/:id](#delete-collectionsid)
 	- [Products Endpoints](#products-endpoints)
 		- [ProductDto](#productdto)
+		- [PagedProductDto](#pagedproductdto)
 		- [ProductForm](#productform)
 		- [GET products](#get-products)
 		- [GET products/:id](#get-productsid)
@@ -111,6 +114,19 @@
 }
 ```
 
+### PagedUserDto
+
+```json
+{
+	"firstPage": 0,
+	"page": 0,
+	"elementsPerPage": 5,
+	"totalElements": 4,
+	"lastPage": 0,
+	"users": [ ...UserDto ]
+}
+```
+
 ### UserFilteredSortedCollectionsDto
 
 ```json
@@ -135,7 +151,7 @@
       "text": "Ordem alfabética decrescente"
     }
   ],
-  "collections": [ ...CollectionDto ]
+  "collections": ...PagedCollectionDto
 }
 ```
 
@@ -153,12 +169,12 @@
 
 - **Função**: `Recupera todos os usuários cadastrados`
 - **Método HTTP**: `GET`
-- **Path**: `/users`
+- **Path**: `/users?page=0&elementsPerPage=10`
 - **Exige autenticação?**: `Sim`
 - **Path params**: `none`
-- **Query params**: `none`
+- **Query params**: `[page inteiro começando por zero], [elementsPerPage inteiro começando por 1]`
 - **Request body params**: `none`
-- **Response Body**: [UserDto[]](#userdto)
+- **Response Body**: [PagedUserDto](#pageduserdto)
 
 ### GET users/:id
 
@@ -178,7 +194,7 @@
 - **Path**: `/users/:id/collection?filter=COLLECTION_OPEN&sort=ALPHABETICAL_DESC`
 - **Exige autenticação?**: `Sim`
 - **Path params**: `id do elemento (string)`
-- **Query params**: `[filter (string contendo o campo 'name' de um dos filters do UserFilteredSortedCollectionsDto)], [sort (string contendo o campo 'name' de um dos sorters do UserFilteredSortedCollectionsDto)]`
+- **Query params**: `[filter (string contendo o campo 'name' de um dos filters do UserFilteredSortedCollectionsDto)], [sort (string contendo o campo 'name' de um dos sorters do UserFilteredSortedCollectionsDto)], [page inteiro começando por zero], [elementsPerPage inteiro começando por 1]`
 - **Request body params**: `none`
 - **Response Body**: [UserFilteredSortedCollectionsDto](#userfilteredsortedcollectionsdto)
 
@@ -233,6 +249,19 @@
 }
 ```
 
+### PagedCollectionDto
+
+```json
+{
+	"firstPage": 0,
+	"page": 0,
+	"elementsPerPage": 5,
+	"totalElements": 4,
+	"lastPage": 0,
+	"collections": [ ...CollectionDto ]
+}
+```
+
 ### CollectionFilteredSortedProductsDto
 
 ```json
@@ -257,7 +286,7 @@
       "text": "Mais baratos"
     }
   ],
-  "products": [ ...ProductDto ]
+  "products": ...PagedProductDto
 }
 ```
 
@@ -273,12 +302,12 @@
 
 - **Função**: `Recupera todas as coleções criadas`
 - **Método HTTP**: `GET`
-- **Path**: `/collections`
+- **Path**: `/collections?page=0&elementsPerPage=10`
 - **Exige autenticação?**: `Sim`
 - **Path params**: `none`
-- **Query params**: `none`
+- **Query params**: `[page inteiro começando por zero], [elementsPerPage inteiro começando por 1]`
 - **Request body params**: `none`
-- **Response Body**: [CollectionDto[]](#collectiondto)
+- **Response Body**: [PagedCollectionDto](#pagedcollectiondto)
 
 ### GET collections/:id
 
@@ -298,7 +327,7 @@
 - **Path**: `/collections/:id/product?filter=FREE_SHIPPING&sort=CHEAPER`
 - **Exige autenticação?**: `Sim`
 - **Path params**: `id do elemento (string)`
-- **Query params**: `[filter (string contendo o campo 'name' de um dos filters do CollectionFilteredSortedProductsDto)], [sort (string contendo o campo 'name' de um dos sorters do CollectionFilteredSortedProductsDto)]`
+- **Query params**: `[filter (string contendo o campo 'name' de um dos filters do CollectionFilteredSortedProductsDto)], [sort (string contendo o campo 'name' de um dos sorters do CollectionFilteredSortedProductsDto)], [page inteiro começando por zero], [elementsPerPage inteiro começando por 1]`
 - **Request body params**: `none`
 - **Response Body**: [CollectionFilteredSortedProductsDto](#collectionfilteredsortedproductsdto)
 
@@ -361,6 +390,19 @@
 }
 ```
 
+### PagedProductDto
+
+```json
+{
+	"firstPage": 0,
+	"page": 0,
+	"elementsPerPage": 5,
+	"totalElements": 4,
+	"lastPage": 0,
+	"products": [ ...ProductDto ]
+}
+```
+
 ### ProductForm
 
 ```json
@@ -387,12 +429,12 @@
 
 - **Função**: `Recupera todos os produtos cadastrados`
 - **Método HTTP**: `GET`
-- **Path**: `/products`
+- **Path**: `/products?page=0&elementsPerPage=10`
 - **Exige autenticação?**: `Sim`
 - **Path params**: `none`
-- **Query params**: `none`
+- **Query params**: `[page inteiro começando por zero], [elementsPerPage inteiro começando por 1]`
 - **Request body params**: `none`
-- **Response Body**: [ProductDto[]](#productdto)
+- **Response Body**: [PagedProductDto](#pagedproductdto)
 
 ### GET products/:id
 
