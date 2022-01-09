@@ -11,6 +11,7 @@ import { User, UserDocument } from 'src/users/entities/user.entity';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { PagedCollectionDto } from './dto/paged-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
+import { WinnerProductDto } from './dto/winner-product.dto';
 import { Collection, CollectionDocument } from './entities/collection.entity';
 
 @Injectable()
@@ -84,7 +85,17 @@ export class CollectionsService {
 		updateCollectionDto: UpdateCollectionDto,
 	): Promise<Collection> {
 		await this.collectionModel.findByIdAndUpdate(id, updateCollectionDto);
-		return this.findOne(id);
+		return await this.findOne(id);
+	}
+
+	async setWinnerProduct(
+		id: string,
+		winnerProductDto: WinnerProductDto,
+	): Promise<Collection> {
+		const collection: Collection = await this.findOne(id);
+		collection.winnerProductId = winnerProductDto.productId;
+		await this.collectionModel.findByIdAndUpdate(id, collection);
+		return await this.findOne(id);
 	}
 
 	async remove(id: string, userId: string): Promise<Collection> {
