@@ -7,8 +7,8 @@ export interface Collection{
     winnerProductId: string;
 }
 
-export const getCollectionsByUserId = async ( userId: string ) => {
-    return api.get(`/users/${userId}/collection?elementsPerPage=9999&page=0`).then( res => res.data );
+export const getCollectionsByUserId = async ( userId: string, filter?: string, sort?: string ) => {
+    return api.get(`/users/${userId}/collection?elementsPerPage=9999&page=0`, { params: { elementsPerPage: 99999, page: 0, filter, sort }}).then( res => res.data );
 }
 
 export const getAllCollections = async () => {

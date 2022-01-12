@@ -8,7 +8,7 @@ import './LogInPage.style.css';
 const LogInPage: React.FC = () => {
     return (
         <div className='log-in-wrapper'>
-            <Typography variant="h3" color="initial"> My shopping assistant</Typography>
+            <Typography variant="h3" color="initial">We Shop</Typography>
             <div className='log-in-container'>
                 <SignIn />
                 <SignUp />
