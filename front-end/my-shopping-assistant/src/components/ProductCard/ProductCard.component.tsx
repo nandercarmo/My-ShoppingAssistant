@@ -5,6 +5,7 @@ import {Button, Card, CardActions, CardContent, CardMedia, Tooltip, Typography} 
 import {Product} from "../../service/products/products.service";
 import './ProductCard.style.css';
 import moment from "moment";
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 interface ProductCardProps {
     product: Product;
@@ -23,9 +24,12 @@ const ProductCard: FC<ProductCardProps> = ( {product, setSelectedProduct, openMo
     return (
         <Card sx={{ minWidth: 350, padding: 1, display: 'grid', alignContent: 'space-between' }}>
             <CardContent>
-                <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-                    {product.name}
-                </Typography>
+                <div>
+                    <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+                        {product.name}
+                    </Typography>
+                    {selectedCollection?.winnerProductId === product._id && <EmojiEventsIcon />}
+                </div>
                 <CardMedia
                     component="img"
                     height="194"
