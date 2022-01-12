@@ -54,7 +54,8 @@ const CollectionPage: React.FC = () => {
                         noWrap
                         component="div"
                         bgcolor='primary'
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        display='inline'
+                        sx={{ mr: 2 }}
                     >
                         {selectedCollection?.name}
                     </Typography>

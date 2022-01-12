@@ -7,17 +7,16 @@ import {
     getProductsByCollectionId,
     Product
 } from "../service/products/products.service";
-import {useCollection} from "./collections";
-import {Collection, deleteCollectionById, getCollectionsByUserId} from "../service/collections/collections.service";
+import {Collection} from "../service/collections/collections.service";
 
 interface ProductsContextData {
     allProducts: ReadonlyArray<Product>;
     selectedCollectionProducts: ReadonlyArray<Product>;
     selectedCollection: Collection | undefined;
     setSelectedCollection : (value:Collection | undefined) => void;
-    // updateProducts(): Promise<void>;
     createNewProduct: (value: Product) => Promise<void>;
     editNewProduct: (value: Product) => Promise<void>;
+    updateProducts: () => Promise<void>;
     getSelectedCollectionProducts(collectionId: string): Promise<void>;
     deleteProduct(productId: string): Promise<void>;
 }
@@ -45,24 +44,21 @@ export const ProductsProvider: React.FC = ({ children }) => {
                 setAllProducts(res.products);
             }
         );
+        if (selectedCollection){
+            await getSelectedCollectionProducts(selectedCollection._id)
+        }
     };
 
     const createNewProduct = async (product: Product) => {
         if (!user) return console.log('error: No user');
         await createProduct(product);
         await updateProducts();
-        if (selectedCollection){
-            await getSelectedCollectionProducts(selectedCollection._id)
-        }
     };
 
     const editNewProduct = async (product: Product) => {
         if (!user) return console.log('error: No user');
         await editProduct(product);
         await updateProducts();
-        if (selectedCollection){
-            await getSelectedCollectionProducts(selectedCollection._id)
-        }
     };
 
     const getSelectedCollectionProducts = async (collectionId: string) => {
@@ -80,7 +76,7 @@ export const ProductsProvider: React.FC = ({ children }) => {
 
     return (
         <ProductsContext.Provider
-            value={{ allProducts, selectedCollectionProducts, selectedCollection, createNewProduct, editNewProduct, setSelectedCollection, getSelectedCollectionProducts, deleteProduct }}
+            value={{ allProducts, selectedCollectionProducts, selectedCollection, createNewProduct, updateProducts, editNewProduct, setSelectedCollection, getSelectedCollectionProducts, deleteProduct }}
         >
             {children}
         </ProductsContext.Provider>

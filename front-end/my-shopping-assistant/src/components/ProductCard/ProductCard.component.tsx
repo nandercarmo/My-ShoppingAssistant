@@ -1,11 +1,11 @@
 import React, {FC} from "react";
-import {useNavigate} from "react-router-dom";
 import {useProducts} from "../../contexts/products";
 import {Button, Card, CardActions, CardContent, CardMedia, Tooltip, Typography} from "@material-ui/core";
 import {Product} from "../../service/products/products.service";
 import './ProductCard.style.css';
 import moment from "moment";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import {useCollection} from "../../contexts/collections";
 
 interface ProductCardProps {
     product: Product;
@@ -14,18 +14,25 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ( {product, setSelectedProduct, openModal} ) => {
-    const navigate = useNavigate();
-    const { deleteProduct, selectedCollection } = useProducts();
+    const { deleteProduct, selectedCollection, updateProducts } = useProducts();
+    const { setWinnerProduct } = useCollection();
 
     const handleOpenProduct = (product:Product) => {
         setSelectedProduct(product);
         openModal();
     }
+
+    const handleWinProduct = async () => {
+        if (selectedCollection?._id && product._id) {
+            await setWinnerProduct( selectedCollection._id, product._id );
+            await updateProducts();
+        }
+    }
     return (
         <Card sx={{ minWidth: 350, padding: 1, display: 'grid', alignContent: 'space-between' }}>
             <CardContent>
                 <div>
-                    <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+                    <Typography sx={{ fontSize: 20, mr:1 }} display='inline' color="text.secondary" gutterBottom>
                         {product.name}
                     </Typography>
                     {selectedCollection?.winnerProductId === product._id && <EmojiEventsIcon />}
@@ -36,6 +43,13 @@ const ProductCard: FC<ProductCardProps> = ( {product, setSelectedProduct, openMo
                     image={product.imageUrl}
                     alt="Paella dish"
                 />
+                {product.productUrl && (
+                    <Button color='error' size='small' variant='outlined' className='product-tags' target="_blank" href={product.productUrl}>
+                        <Typography sx={{ fontSize: 'small' }} color="text.secondary">
+                            Go to product
+                        </Typography>
+                    </Button>
+                )}
                 <Typography color="text.secondary">
                     Advantages:
                 </Typography>
@@ -75,8 +89,8 @@ const ProductCard: FC<ProductCardProps> = ( {product, setSelectedProduct, openMo
                 </Typography>
             </CardContent>
             <CardActions className='card-actions' sx={{ height: 'min-content'}}>
-                <Button size="small" color='primary' variant='outlined' onClick={() => {handleOpenProduct(product)}}>Open</Button>
-
+                <Button size="small" color='primary' variant='outlined' onClick={handleWinProduct}>Select</Button>
+                <Button size="small" color='secondary' variant='outlined' onClick={() => {handleOpenProduct(product)}}>Edit</Button>
                 <Button size="small" color='error' variant='outlined' onClick={() => product._id && deleteProduct(product._id)}>Delete</Button>
             </CardActions>
         </Card>

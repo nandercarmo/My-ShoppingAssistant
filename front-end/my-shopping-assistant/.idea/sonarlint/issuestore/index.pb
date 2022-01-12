@@ -29,7 +29,5 @@ B
 src/MainRoutes.tsx,a/1/a1c1768c1dfef17c5e773c46e7c392fb1335d848
 j
 :src/components/CollectionCard/CollectionCard.component.tsx,7/1/71437e3e0bcedb79a1056e99a474a19b5dfbd931
-^
-.src/service/collections/collections.service.ts,9/0/909576ee8566831cc4cd3da615f4b5f1b1e89ec9
 Z
 *src/pages/dashboard/DashboadPage.style.css,2/e/2e37b8dccb828863413669d0c5b022d621af61a9

@@ -74,7 +74,7 @@ const ProductModal: FC<ProductModalProps> = ({ product, setSelectedProduct, clos
         setProductUrl(product.productUrl ?? '');
         setPrice(product.price);
         setShipPrice(product.shipValue);
-        setDate(product.deliveryDate ?? '');
+        setDate(moment(product.deliveryDate).format('YYYY-MM-DD') ?? '');
         setAdvantages(product.advantages ?? []);
         setDisadvantages(product.disadvantages ?? []);
     }, [product])
@@ -153,7 +153,7 @@ const ProductModal: FC<ProductModalProps> = ({ product, setSelectedProduct, clos
                 {advantages.map((advantage, index) => {
                     return (
                         <div>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            <Typography id="modal-modal-description" display='inline' sx={{ mt: 2 }}>
                                 {advantage}
                             </Typography>
                             <IconButton onClick={() => deleteAdvantage(index)}>
@@ -180,7 +180,7 @@ const ProductModal: FC<ProductModalProps> = ({ product, setSelectedProduct, clos
                 {disadvantages.map((disadvantage, index) => {
                     return (
                         <div className='to-add-modal'>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            <Typography id="modal-modal-description"  display='inline' sx={{ mt: 2 }}>
                                 {disadvantage}
                             </Typography>
                             <IconButton onClick={() => deleteDisadvantage(index)}>

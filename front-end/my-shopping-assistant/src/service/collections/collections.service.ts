@@ -19,6 +19,10 @@ export const createCollection = async ( name: string, userId: string ) => {
     return api.post('/collections', { name, userId }).then( res => res );
 }
 
+export const winProductFromCollection = async ( collectionId: string, productId: string ) => {
+    return api.put(`/collections/${collectionId}/finish`, { productId }).then( res => res );
+}
+
 export const getCollectionById = async ( id: string ) => {
     return api.get('/collections/' + id).then( res => res );
 }
