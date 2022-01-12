@@ -48,6 +48,7 @@ export const CollectionsProvider: React.FC = ({ children }) => {
         await deleteCollectionById(collectionId);
         await updateCollections();
     }
+
     return (
         <CollectionsContext.Provider
             value={{ collections, updateCollections, createNewCollection, deleteCollection }}

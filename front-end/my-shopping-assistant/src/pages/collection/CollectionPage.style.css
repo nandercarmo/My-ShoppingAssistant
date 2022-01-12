@@ -1,0 +1,19 @@
+.collection-container{
+    padding: 16px;
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 8px;
+}
+
+.product-cards-container{
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.create-collection-card-actions{
+    padding-left: 16px !important;
+    padding-bottom: 8px !important;
+}

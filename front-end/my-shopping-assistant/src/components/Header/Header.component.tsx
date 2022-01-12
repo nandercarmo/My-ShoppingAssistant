@@ -14,12 +14,14 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import {useAuth} from "../../contexts/auth";
 import './Header.style.css';
+import {useNavigate} from "react-router-dom";
 
-const pages = ['dashboard', 'products'];
+const pages = ['Dashboard', 'Products'];
 const settings = ['Profile', 'Logout'];
 
 const Header: FC = () => {
     const { Logout, user } = useAuth();
+    const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -34,6 +36,10 @@ const Header: FC = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const handleClickNavMenu = ( page: string ) => {
+        navigate(`/${page.toLowerCase()}`);
+    }
 
     const handleCloseUserMenu = (key:string) => {
         if(key === 'Logout'){
@@ -85,7 +91,7 @@ const Header: FC = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={() => handleClickNavMenu(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -97,13 +103,13 @@ const Header: FC = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        LOGO
+                        We Shop
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => handleClickNavMenu(page)}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
