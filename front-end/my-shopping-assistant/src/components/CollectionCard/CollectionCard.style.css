@@ -3,6 +3,6 @@
     padding-right: 16px !important;
     padding-bottom: 8px !important;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     justify-content: space-between;
 }

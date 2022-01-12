@@ -13,8 +13,8 @@ export interface Product{
     price?: number;
 }
 
-export const getProductsByCollectionId = async ( collectionId: string ) => {
-    return api.get(`/collections/${collectionId}/product`).then( res => res.data );
+export const getProductsByCollectionId = async ( collectionId: string, filter?: string, sort?: string ) => {
+    return api.get(`/collections/${collectionId}/product`, { params: { elementsPerPage: 99999, page: 0, filter, sort }}).then( res => res.data );
 }
 
 export const getAllProducts = async () => {

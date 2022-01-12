@@ -46,7 +46,7 @@ export const CollectionsProvider: React.FC = ({ children }) => {
                 }
             );
         }
-    }, [user]);
+    }, [filter, sorter, user]);
 
     const updateCollections = async () => {
         if (!user) return console.log('error: No user');

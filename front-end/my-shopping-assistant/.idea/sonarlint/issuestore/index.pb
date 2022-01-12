@@ -21,8 +21,6 @@ S
 #src/pages/login/LogInPage.style.css,6/9/6932e583316252bc341c2ea123a36f36cc420e66
 V
 &src/components/Header/Header.style.css,f/7/f76d3f71f9039234f52d27655ccf16d0adf724c5
-f
-6src/components/CollectionCard/CollectionCard.style.css,c/9/c9b35b8cd327add5caf7a4c3560f7dfde1432634
 E
 src/contexts/auth.tsx,6/b/6bdc021f78af358417ce9f70c7fef6f71cf98072
 B
